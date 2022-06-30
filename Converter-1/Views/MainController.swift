@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainController.swift
 //  Converter-1
 //
 //  Created by Ap on 6.06.22.
@@ -9,7 +9,8 @@ import UIKit
 
 class MainController: UIViewController {
     
-    var viewModel = MainViewModel()
+    let viewModel = MainViewModel()
+    let validator = Validation()
     
     @IBOutlet weak var editableAmountTextField: UITextField!
     @IBOutlet weak var finalAmountLabel: UILabel!
@@ -25,7 +26,7 @@ class MainController: UIViewController {
         super.viewDidLoad()
         editableAmountTextField.becomeFirstResponder()
         editableAmountTextField.addTarget(self, action: #selector(MainController.textFieldDidChange(_:)), for: .editingChanged)
-        binding()
+        bind()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,25 +40,10 @@ class MainController: UIViewController {
         heightFinalAmountViewConstraint.constant = heightCells
     }
     
-    private func binding() {
+    private func bind() {
         viewModel.editableAmount.bind { [weak self] in
             guard let string = $0 else { return }
             self?.finalAmountLabel.text = string
-        }
-    }
-    
-    /// protecting textField from incorrect data
-    private func validationTextField(textField: UITextField) {
-        if textField.text == "" || textField.text == "." {
-            textField.text = "0"
-        }
-        if textField.text?.count ?? 0 > 1, textField.text?.prefix(1) == "0" {
-            textField.text?.removeFirst()
-        }
-        if let countPoints = textField.text?.filter({ $0 == "." }).count {
-            if countPoints > 1 {
-                textField.text?.removeLast()
-            }
         }
     }
     
@@ -70,7 +56,7 @@ class MainController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        validationTextField(textField: textField)
+        textField.text = validator.validateTextField(textField: textField)
         viewModel.editableAmount.value = textField.text
         conversion()
     }
@@ -80,12 +66,12 @@ class MainController: UIViewController {
 // MARK: extensions
 extension MainController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
+        return viewModel.getNumberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellMainTableView", for: indexPath) as? TableViewCell else { return UITableViewCell() }
-        cell.viewModel = viewModel.cellViewModel(indexPath: indexPath)
+        cell.viewModel = viewModel.getCellViewModel(indexPath: indexPath)
         cell.configure()
         return cell
     }

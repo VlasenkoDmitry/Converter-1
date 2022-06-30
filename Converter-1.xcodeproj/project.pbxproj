@@ -23,6 +23,7 @@
 		E1271759284E2F1C005AAAFF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271758284E2F1C005AAAFF /* SettingsViewModel.swift */; };
 		E15B77F0284F2E6000CCF09E /* TableViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B77EF284F2E6000CCF09E /* TableViewModelType.swift */; };
 		E15B77F2284F304500CCF09E /* TableViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B77F1284F304500CCF09E /* TableViewCellViewModelType.swift */; };
+		E17E9FD5286DFEE1007667C6 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E9FD4286DFEE1007667C6 /* Validation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E1271758284E2F1C005AAAFF /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E15B77EF284F2E6000CCF09E /* TableViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModelType.swift; sourceTree = "<group>"; };
 		E15B77F1284F304500CCF09E /* TableViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelType.swift; sourceTree = "<group>"; };
+		E17E9FD4286DFEE1007667C6 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				E1271748284DDD9F005AAAFF /* СonversionData.swift */,
 				E127174E284DE3AD005AAAFF /* Bindable.swift */,
+				E17E9FD4286DFEE1007667C6 /* Validation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				E1271753284DFEB9005AAAFF /* TableViewCell.swift in Sources */,
 				E1271757284E2F06005AAAFF /* SettingsViewController.swift in Sources */,
 				E127174B284DE0CE005AAAFF /* MainViewModel.swift in Sources */,
+				E17E9FD5286DFEE1007667C6 /* Validation.swift in Sources */,
 				E15B77F0284F2E6000CCF09E /* TableViewModelType.swift in Sources */,
 				E1271732284DD421005AAAFF /* MainController.swift in Sources */,
 				E127172E284DD421005AAAFF /* AppDelegate.swift in Sources */,

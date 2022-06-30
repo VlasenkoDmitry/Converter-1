@@ -29,7 +29,7 @@ class MainViewModel: TableViewModelType {
             dispatchGroup.enter() // +1
             DispatchQueue.global(qos: .utility).async {
                 
-                self.networkManager.requestConversion(amount: amount, from: from, to: element) { [weak self] resultFromRequest in
+                self.networkManager.getRequestConversion(amount: amount, from: from, to: element) { [weak self] resultFromRequest in
                     if let resultFromRequest = resultFromRequest {
                         if let firstNegative = self?.arrayConversionData?.first(where: { $0.to == resultFromRequest.to }) {
                             firstNegative.result = resultFromRequest.result
@@ -62,12 +62,12 @@ class MainViewModel: TableViewModelType {
     }
     
     /// counting the number of arrayConversion Data to find out how many rows there will be in the tableview
-    func numberOfRows() -> Int {
+    func getNumberOfRows() -> Int {
         return arrayConversionData?.count ?? 2
     }
     
     /// creating separate viewModels for each cell of tableView
-    func cellViewModel(indexPath: IndexPath) -> TableViewCellViewModelType? {
+    func getCellViewModel(indexPath: IndexPath) -> TableViewCellViewModelType? {
         guard let array = arrayConversionData else { return nil }
         return TableViewCellViewModel(result: array[indexPath.row])
     }
