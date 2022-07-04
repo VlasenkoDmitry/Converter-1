@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    var viewModel: TableViewCellViewModelType?
+    private var viewModel: TableViewCellViewModelType?
     
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var currencyNameToLabel: UILabel!
@@ -26,7 +26,8 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure() {
+    func configure(viewModel: TableViewCellViewModelType?) {
+        self.viewModel = viewModel
         resultLabel.text = viewModel?.result
         currencyNameToLabel.text = viewModel?.currencyNameTo
         currencyNameImage.image = viewModel?.image

@@ -24,6 +24,7 @@
 		E15B77F0284F2E6000CCF09E /* TableViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B77EF284F2E6000CCF09E /* TableViewModelType.swift */; };
 		E15B77F2284F304500CCF09E /* TableViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B77F1284F304500CCF09E /* TableViewCellViewModelType.swift */; };
 		E17E9FD5286DFEE1007667C6 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E9FD4286DFEE1007667C6 /* Validation.swift */; };
+		E1890ECB2873634C00527D0D /* ConversionDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1890ECA2873634C00527D0D /* ConversionDataProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		E15B77EF284F2E6000CCF09E /* TableViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModelType.swift; sourceTree = "<group>"; };
 		E15B77F1284F304500CCF09E /* TableViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellViewModelType.swift; sourceTree = "<group>"; };
 		E17E9FD4286DFEE1007667C6 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		E1890ECA2873634C00527D0D /* ConversionDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionDataProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +81,13 @@
 			isa = PBXGroup;
 			children = (
 				E1271744284DD972005AAAFF /* App */,
+				E1271742284DD958005AAAFF /* Controllers */,
 				E1271741284DD950005AAAFF /* Models */,
 				E15B77F4284F34C300CCF09E /* Network */,
 				E127174D284DE2C5005AAAFF /* Protocols */,
 				E1271745284DD978005AAAFF /* Resourses */,
 				E15B77F3284F32E300CCF09E /* Storyboard */,
 				E1271743284DD960005AAAFF /* ViewModels */,
-				E1271742284DD958005AAAFF /* Views */,
 			);
 			path = "Converter-1";
 			sourceTree = "<group>";
@@ -100,14 +102,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		E1271742284DD958005AAAFF /* Views */ = {
+		E1271742284DD958005AAAFF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				E1271731284DD421005AAAFF /* MainController.swift */,
 				E1271756284E2F06005AAAFF /* SettingsViewController.swift */,
 				E1C08843284F369300A6E66A /* Cells */,
 			);
-			path = Views;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		E1271743284DD960005AAAFF /* ViewModels */ = {
@@ -144,6 +146,7 @@
 			children = (
 				E15B77EF284F2E6000CCF09E /* TableViewModelType.swift */,
 				E15B77F1284F304500CCF09E /* TableViewCellViewModelType.swift */,
+				E1890ECA2873634C00527D0D /* ConversionDataProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				E17E9FD5286DFEE1007667C6 /* Validation.swift in Sources */,
 				E15B77F0284F2E6000CCF09E /* TableViewModelType.swift in Sources */,
 				E1271732284DD421005AAAFF /* MainController.swift in Sources */,
+				E1890ECB2873634C00527D0D /* ConversionDataProtocol.swift in Sources */,
 				E127172E284DD421005AAAFF /* AppDelegate.swift in Sources */,
 				E127174F284DE3AD005AAAFF /* Bindable.swift in Sources */,
 				E1271759284E2F1C005AAAFF /* SettingsViewModel.swift in Sources */,

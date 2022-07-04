@@ -15,7 +15,7 @@ class NetworkManager {
         completion(ConversionData(amount: amount, from: from, to: to, result: "\(random)", image: nil))
     }
     
-    func dowmloadImage(url: URL, completion: (Data?)->()) {
+    func fakeDownloadImage(url: URL, completion: (Data?)->()) {
         completion( UIImage(systemName: "pencil" )?.pngData())
     }
     

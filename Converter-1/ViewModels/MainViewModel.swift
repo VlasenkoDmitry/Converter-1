@@ -10,58 +10,57 @@ import UIKit
 
 class MainViewModel: TableViewModelType {
     
-    var editableAmount: Bindable<String?> = Bindable("0")
-    var networkManager = NetworkManager()
-    var arrayConversionData: [ConversionData]?
+    let editableAmount: Bindable<String?> = Bindable("0")
+    private let networkManager = NetworkManager()
+    private let dispatchGroup = DispatchGroup()
+    private var arrayConversionData: [ConversionData]?
     
     func conversion(amount: String, from: String, to: [String], completion: @escaping()->()) {
-        /// cleaning the array to protect against old information
         arrayConversionData = []
         for element in to {
             arrayConversionData?.append(ConversionData(amount: amount, from: from, to: element, result: nil, image: nil))
         }
-        
-        /// grouping the download to synchronize its display on the screen
-        let dispatchGroup = DispatchGroup()
-        for element in to {
-            
-            ///download result
-            dispatchGroup.enter() // +1
-            DispatchQueue.global(qos: .utility).async {
-                
-                self.networkManager.getRequestConversion(amount: amount, from: from, to: element) { [weak self] resultFromRequest in
-                    if let resultFromRequest = resultFromRequest {
-                        if let firstNegative = self?.arrayConversionData?.first(where: { $0.to == resultFromRequest.to }) {
-                            firstNegative.result = resultFromRequest.result
-                        }
-                    }
-                    dispatchGroup.leave()
-                }
-            }
-            
-            ///download imageData
-            dispatchGroup.enter() // +1
-            DispatchQueue.global(qos: .utility).async {
-                self.networkManager.dowmloadImage(url: URL(string: "www....")!) { [element] imageData in
-                    if let imageData = imageData {
-                        if let firstNegative = self.arrayConversionData?.first(where: { $0.to == element }) {
-                            firstNegative.image = UIImage(data: imageData)
-                        }
-                        dispatchGroup.leave()
-                    }
-                }
-            }
+        for currency in to {
+            downloadResult(amount: amount, from: from, to: currency)
+            downloadImageData(amount: amount, from: from, to: currency)
         }
-
         dispatchGroup.wait()
-        
-        ///working after download all results and imagesData
         dispatchGroup.notify(queue: .main) {
             completion()
         }
     }
     
-    /// counting the number of arrayConversion Data to find out how many rows there will be in the tableview
+    private func downloadResult(amount: String, from: String, to: String) {
+        dispatchGroup.enter()
+        DispatchQueue.global(qos: .utility).async {
+            
+            self.networkManager.getRequestConversion(amount: amount, from: from, to: to) { [weak self] resultFromRequest in
+                if let resultFromRequest = resultFromRequest {
+                    if let firstNegative = self?.arrayConversionData?.first(where: { $0.getToCurrence() == resultFromRequest.getToCurrence() }) {
+                        firstNegative.setResult(result: resultFromRequest.getResult())
+                    }
+                }
+                self?.dispatchGroup.leave()
+            }
+        }
+    }
+    
+    private func downloadImageData(amount: String?, from: String?, to: String?) {
+        dispatchGroup.enter() // +1
+        DispatchQueue.global(qos: .utility).async {
+            self.networkManager.fakeDownloadImage(url: URL(string: "www....")!) { [weak self] imageData in
+                if let imageData = imageData {
+                    if let firstNegative = self?.arrayConversionData?.first(where: { $0.getToCurrence() == to }) {
+                        firstNegative.setImage(image: UIImage(data: imageData))
+                    }
+                    self?.dispatchGroup.leave()
+                }
+            }
+        }
+    }
+    
+    
+    /// to find out how many rows there will be in the tableview
     func getNumberOfRows() -> Int {
         return arrayConversionData?.count ?? 2
     }

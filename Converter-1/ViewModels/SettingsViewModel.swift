@@ -9,7 +9,7 @@ import Foundation
 
 class SettingsViewModel {
     
-    var arraySettings: [String] {
+    private var arraySettings: [String] {
         []
     }
     

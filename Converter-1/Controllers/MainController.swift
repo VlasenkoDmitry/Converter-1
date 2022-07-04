@@ -9,18 +9,16 @@ import UIKit
 
 class MainController: UIViewController {
     
-    let viewModel = MainViewModel()
-    let validator = Validation()
-    
+    private let viewModel = MainViewModel()
+    private let validator = Validation()
+    private var heightCells: CGFloat {
+        return view.frame.size.height / 15
+    }
     @IBOutlet weak var editableAmountTextField: UITextField!
     @IBOutlet weak var finalAmountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightEditableAmountVIewConstraint: NSLayoutConstraint!
     @IBOutlet weak var heightFinalAmountViewConstraint: NSLayoutConstraint!
-    
-    var heightCells: CGFloat {
-        return view.frame.size.height / 15
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,8 +69,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellMainTableView", for: indexPath) as? TableViewCell else { return UITableViewCell() }
-        cell.viewModel = viewModel.getCellViewModel(indexPath: indexPath)
-        cell.configure()
+        cell.configure(viewModel: viewModel.getCellViewModel(indexPath: indexPath))
         return cell
     }
 

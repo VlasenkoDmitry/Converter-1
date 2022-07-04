@@ -9,22 +9,22 @@ import Foundation
 import UIKit
 
 class TableViewCellViewModel: TableViewCellViewModelType {
-    var resultObject: ConversionData
+    private var resultObject: ConversionData
     
     init(result: ConversionData) {
         self.resultObject = result
     }
     
     var result: String {
-        return resultObject.result ?? ""
+        return resultObject.getResult() ?? ""
     }
     
     var currencyNameTo: String {
-        return resultObject.to ?? ""
+        return resultObject.getToCurrence() ?? ""
     }
     
     var image: UIImage? {
-        return resultObject.image ?? UIImage(named: "xmark")
+        return resultObject.getImage() ?? UIImage(named: "xmark")
     }
     
 }
